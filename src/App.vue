@@ -1,28 +1,31 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <!-- 我是头部 -->
+    <header>
+      <h2>我是头部</h2>
+      <button @click="back">&lt;</button>
+      <button @click="pre">&gt;</button>
+    </header>
+    <!-- 路由出口 -->
+    <router-view />
+    <!-- 路由以外的公共部分 -->
+    <footer>我是脚部</footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
+  name: "App",
+  methods: {
+    back() {
+      this.$router.go(-1)
+    },
+    pre() {
+      this.$router.go(1)
+    },
   }
-}
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
