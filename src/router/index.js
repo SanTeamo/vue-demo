@@ -44,7 +44,10 @@ const router = new Router({
                     // 当 /router/nested/:name/DynamicRoute 匹配成功，
                     // DynamicRoute 会被渲染在 NestedRoute 的 <router-view> 中
                     path: 'dynamic',
-                    component: DynamicRoute
+                    component: DynamicRoute,
+                    meta: {
+                        requiresAuth: true,
+                    },
                 },
             ]
         },
@@ -119,7 +122,20 @@ const router = new Router({
 router.beforeEach((to, from, next) => {
     console.log('%c 全局前置守卫 beforeEach', 'color:blue')
     console.log(to, from)
-    next()
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        const meta = to.meta || {}
+        const params = to.params || {}
+        if (meta.requiresAuth && params.name !== 'Bob') {
+            next({
+                path: '/',
+                query: { redirect: to.fullPath }
+            })
+        } else {
+            next()
+        }
+    } else {
+        next() // 确保一定要调用 next()
+    }
 })
 
 router.beforeResolve((to, from, next) => {
