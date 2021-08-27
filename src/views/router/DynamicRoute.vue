@@ -6,6 +6,7 @@
 </template>
  
 <script>
+console.log('load DynamicRoute.vue')
 export default {
   name: 'dynamic',
   computed: {

@@ -17,6 +17,7 @@
 </template>
  
 <script>
+console.log('load NestedRoute.vue')
 export default {
   name: 'nested',
   computed: {

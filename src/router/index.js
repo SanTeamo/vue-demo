@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import BasicRoute from '@/views/router/BasicRoute.vue'
-import DynamicRoute from '@/views/router/DynamicRoute.vue'
+//路由懒加载
+// import BasicRoute from '@/views/router/BasicRoute.vue'
+const BasicRoute = () => import('@/views/router/BasicRoute.vue')
+// import DynamicRoute from '@/views/router/DynamicRoute.vue'
+const DynamicRoute = () => import('@/views/router/DynamicRoute.vue')
 import NestedRoute from '@/views/router/NestedRoute.vue'
 import ErrorPage404 from '@/views/error-page/404.vue'
 import ProgrammaticNavigation from '@/views/router/ProgrammaticNavigation.vue'
@@ -116,7 +119,16 @@ const router = new Router({
             name: 'errorPage404',
             redirect: '/404',
         }
-    ]
+    ],
+    scrollBehavior(to, from, savedPosition) {
+        console.log(savedPosition);
+        // return 期望滚动到哪个的位置
+        if (savedPosition) {
+            return savedPosition
+        } else {
+            return { x: 0, y: 0 }
+        }
+    },
 })
 
 router.beforeEach((to, from, next) => {
