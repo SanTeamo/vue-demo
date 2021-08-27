@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  name: 'lowCouplingRoute',
+  name: 'PassingProps',
   props: ['name', 'id', 'q'],
   created() {
     console.log(this.$route.params)

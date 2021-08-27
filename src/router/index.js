@@ -7,8 +7,9 @@ import ErrorPage404 from '@/views/error-page/404.vue'
 import ProgrammaticNavigation from '@/views/router/ProgrammaticNavigation.vue'
 import NamedView from '@/views/router/NamedView.vue'
 import PassingPropsRoute from '@/views/router/PassingPropsRoute.vue'
+import InComponentGuards from '@/views/router/InComponentGuards.vue'
 Vue.use(Router)
-export default new Router({
+const router = new Router({
     // 匹配的优先级按照路由的定义顺序：路由定义得越早，优先级就越高。
     routes: [
         {
@@ -86,16 +87,50 @@ export default new Router({
             props: route => ({ q: route.query.q, name: 'a' }),
         },
         {
+            path: '/router/InComponentGuards',
+            component: InComponentGuards,
+            props: route => ({ q: route.query.q, name: 'a' }),
+        },
+        {
             path: '/',
             name: 'index',
             // redirect: '/router/NamedView', // 按路径
             redirect: { name: 'BasicRoute' }, // 按路由名称
         },
         {
+            path: '/404',
+            name: 'errorPage404',
+            component: ErrorPage404,
+            beforeEnter: (to, from, next) => {
+                console.log('%c 路由独享守卫 beforeEnter', 'color:blue')
+                console.log(to, from)
+                next()
+            },
+        },
+        {
             // 当使用通配符路由时，请确保路由的顺序是正确的，也就是说含有通配符的路由应该放在最后。路由{ path: '*' } 通常用于客户端 404 错误
             path: '*',
-            name: '404',
-            component: ErrorPage404,
+            name: 'errorPage404',
+            redirect: '/404',
         }
     ]
 })
+
+router.beforeEach((to, from, next) => {
+    console.log('%c 全局前置守卫 beforeEach', 'color:blue')
+    console.log(to, from)
+    next()
+})
+
+router.beforeResolve((to, from, next) => {
+    console.log('%c 全局解析守卫 beforeResolve', 'color:blue')
+    console.log(to, from)
+    next()
+})
+
+router.afterEach((to, from) => {
+    console.log('%c 全局后置钩子 afterEach', 'color:blue')
+    console.log(to, from)
+})
+
+export default router
