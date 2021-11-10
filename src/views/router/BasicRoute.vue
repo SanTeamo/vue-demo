@@ -2,14 +2,10 @@
   <div>
     <h2>basic route</h2>
     <div>
-      <button @click="$router.push('/router/dynamic/Alice')">
-        点击跳转 dynamic route
-      </button>
+      <button @click="$router.push('/router/dynamic/Alice')">点击跳转 dynamic route</button>
     </div>
     <div>
-      <button @click="nestedButtonClick">
-        点击跳转 nested route
-      </button>
+      <button @click="nestedButtonClick">点击跳转 nested route</button>
     </div>
   </div>
 </template>
@@ -20,10 +16,9 @@ export default {
   methods: {
     nestedButtonClick() {
       this.$router.push('/router/nested/Bob')
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

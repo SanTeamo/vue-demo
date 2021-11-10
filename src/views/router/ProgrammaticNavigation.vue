@@ -2,9 +2,7 @@
   <div>
     <h2>编程式的导航</h2>
     <div>
-      <button @click="push">
-        push
-      </button>
+      <button @click="push">push</button>
       <table>
         <tr>
           <td>声明式</td>
@@ -31,8 +29,7 @@
       </pre>
       <p>
         注意：如果提供了 path，params 会被忽略，上述例子中的 query
-        并不属于这种情况。取而代之的是下面例子的做法，你需要提供路由的 name
-        或手写完整的带有参数的 path：
+        并不属于这种情况。取而代之的是下面例子的做法，你需要提供路由的 name 或手写完整的带有参数的 path：
       </p>
       <pre>
           const userId = '123'
@@ -44,9 +41,7 @@
     </div>
     <hr />
     <div>
-      <button @click="replace">
-        replace
-      </button>
+      <button @click="replace">replace</button>
       <table>
         <tr>
           <td>声明式</td>
@@ -60,12 +55,8 @@
     </div>
     <hr />
     <div>
-      <button @click="goBack">
-        back
-      </button>
-      <button @click="goPrev">
-        prev
-      </button>
+      <button @click="goBack">back</button>
+      <button @click="goPrev">prev</button>
     </div>
   </div>
 </template>
@@ -85,10 +76,9 @@ export default {
     },
     goPrev() {
       this.$router.go(1)
-    }
-  }
+    },
+  },
 }
 </script>
 
-<style lang="css" scoped>
-</style>
+<style lang="css" scoped></style>

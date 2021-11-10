@@ -1,25 +1,24 @@
 <template>
   <div>
     <h2>dynamic route</h2>
-    <span>{{ "我的name是：" + name }}</span>
+    <span>{{ '我的name是：' + name }}</span>
   </div>
 </template>
- 
+
 <script>
 console.log('load DynamicRoute.vue')
 export default {
   name: 'dynamic',
   computed: {
     name: function () {
-      return this.$route.params.name; //参数都保存在params中
+      return this.$route.params.name //参数都保存在params中
     },
   },
   created() {
-    console.log("this.$route", this.$route); // 当前子页面路由信息
-    console.log("this.$router", this.$router); // 全局路由信息
+    console.log('this.$route', this.$route) // 当前子页面路由信息
+    console.log('this.$router', this.$router) // 全局路由信息
   },
-};
+}
 </script>
- 
-<style lang="css" scoped>
-</style>
+
+<style lang="css" scoped></style>

@@ -24,8 +24,8 @@ export default {
     },
     pre() {
       this.$router.go(1)
-    }
-  }
+    },
+  },
 }
 </script>
 
