@@ -1,25 +1,33 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import pages from './page/pages'
 //路由懒加载
 // import BasicRoute from '@/views/router/BasicRoute.vue'
 const BasicRoute = () => import('@/views/router/BasicRoute.vue')
 // import DynamicRoute from '@/views/router/DynamicRoute.vue'
 const DynamicRoute = () => import('@/views/router/DynamicRoute.vue')
 import NestedRoute from '@/views/router/NestedRoute.vue'
-import ErrorPage404 from '@/views/error-page/404.vue'
-import ProgrammaticNavigation from '@/views/router/ProgrammaticNavigation.vue'
 import NamedView from '@/views/router/NamedView.vue'
 import PassingPropsRoute from '@/views/router/PassingPropsRoute.vue'
 import InComponentGuards from '@/views/router/InComponentGuards.vue'
 
 Vue.use(VueRouter)
 
-const routes = [
-  {
-    path: '/router/basic', //浏览器访问路径
-    name: 'BasicRoute', //路由名称
-    component: BasicRoute, //模板，对应import引入的模板信息
-  },
+// 匹配 ./folderA/compA.vue 或者 ./folder-a/comp-a.vue
+const files = require.context('../views', true, /^.\/[\w|-]+\/[\w|-]+\.vue$/i)
+let routes = []
+files.keys().forEach((key) => {
+  console.log(key)
+  let newKey = key.replace(/(\.\/|\.vue)/g, '')
+  const route = {
+    path: `/${newKey}`,
+    name: newKey.replace(/(\/)/g, '-'),
+    component: () => import(/* webpackChunkName: "about" */ `@/views/${newKey}`),
+  }
+  routes.push(route)
+})
+
+routes = routes.concat([
   {
     path: '/router/dynamic/:name',
     name: 'DynamicRoute',
@@ -53,11 +61,6 @@ const routes = [
         },
       },
     ],
-  },
-  {
-    path: '/router/ProgrammaticNavigation',
-    name: 'ProgrammaticNavigation',
-    component: ProgrammaticNavigation,
   },
   {
     path: '/router/NamedView',
@@ -98,29 +101,8 @@ const routes = [
     component: InComponentGuards,
     props: (route) => ({ q: route.query.q, name: 'a' }),
   },
-  {
-    path: '/',
-    name: 'index',
-    // redirect: '/router/NamedView', // 按路径
-    redirect: { name: 'BasicRoute' }, // 按路由名称
-  },
-  {
-    path: '/404',
-    name: 'errorPage404',
-    component: ErrorPage404,
-    beforeEnter: (to, from, next) => {
-      console.log('%c 路由独享守卫 beforeEnter', 'color:blue')
-      console.log(to, from)
-      next()
-    },
-  },
-  {
-    // 当使用通配符路由时，请确保路由的顺序是正确的，也就是说含有通配符的路由应该放在最后。路由{ path: '*' } 通常用于客户端 404 错误
-    path: '*',
-    name: 'errorPage404',
-    redirect: '/404',
-  },
-]
+  ...pages,
+])
 
 const router = new VueRouter({
   mode: 'history',
@@ -129,8 +111,8 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  console.log('%c 全局前置守卫 beforeEach', 'color:blue')
-  console.log(to, from)
+  // console.log('%c 全局前置守卫 beforeEach', 'color:blue')
+  // console.log(to, from)
   if (to.matched.some((record) => record.meta.requiresAuth)) {
     const meta = to.meta || {}
     const params = to.params || {}
@@ -148,14 +130,15 @@ router.beforeEach((to, from, next) => {
 })
 
 router.beforeResolve((to, from, next) => {
-  console.log('%c 全局解析守卫 beforeResolve', 'color:blue')
-  console.log(to, from)
+  // console.log('%c 全局解析守卫 beforeResolve', 'color:blue')
+  // console.log(to, from)
   next()
 })
 
+// eslint-disable-next-line no-unused-vars
 router.afterEach((to, from) => {
-  console.log('%c 全局后置钩子 afterEach', 'color:blue')
-  console.log(to, from)
+  // console.log('%c 全局后置钩子 afterEach', 'color:blue')
+  // console.log(to, from)
 })
 
 export default router
