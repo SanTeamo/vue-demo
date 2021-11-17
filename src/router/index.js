@@ -3,13 +3,13 @@ import VueRouter from 'vue-router'
 import pages from './page/pages'
 //路由懒加载
 // import BasicRoute from '@/views/router/BasicRoute.vue'
-const BasicRoute = () => import('@/views/router/BasicRoute.vue')
+const BasicRoute = () => import('@/views/router/basic-route.vue')
 // import DynamicRoute from '@/views/router/DynamicRoute.vue'
-const DynamicRoute = () => import('@/views/router/DynamicRoute.vue')
-import NestedRoute from '@/views/router/NestedRoute.vue'
-import NamedView from '@/views/router/NamedView.vue'
-import PassingPropsRoute from '@/views/router/PassingPropsRoute.vue'
-import InComponentGuards from '@/views/router/InComponentGuards.vue'
+const DynamicRoute = () => import('@/views/router/dynamic-route.vue')
+import NestedRoute from '@/views/router/nested-route.vue'
+import NamedView from '@/views/router/named-view.vue'
+import PassingPropsRoute from '@/views/router/passing-props-route.vue'
+import InComponentGuards from '@/views/router/in-component-guards.vue'
 
 Vue.use(VueRouter)
 
@@ -31,7 +31,7 @@ routes = routes.concat([
   {
     path: '/router/dynamic/:name',
     name: 'DynamicRoute',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/router/DynamicRoute'),
+    component: () => import(/* webpackChunkName: "about" */ '@/views/router/dynamic-route'),
   },
   {
     path: '/router/nested/:name',

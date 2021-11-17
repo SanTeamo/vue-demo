@@ -1,7 +1,7 @@
 <script>
 import SlotChild from './slot-child'
 export default {
-  name: 'demo-slot-render',
+  name: 'slot-render',
   components: {
     SlotChild,
   },

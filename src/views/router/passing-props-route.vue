@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'PassingProps',
+  name: 'passing-props-route',
   props: ['name', 'id', 'q'],
   created() {
     console.log(this.$route.params)

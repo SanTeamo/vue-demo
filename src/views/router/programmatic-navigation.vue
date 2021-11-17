@@ -63,7 +63,7 @@
 
 <script>
 export default {
-  name: 'basic',
+  name: 'programmatic-navigation',
   methods: {
     push() {
       this.$router.push('/router/nested/Bob')

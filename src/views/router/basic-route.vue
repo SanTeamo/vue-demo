@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'basic',
+  name: 'basic-route',
   methods: {
     nestedButtonClick() {
       this.$router.push('/router/nested/Bob')

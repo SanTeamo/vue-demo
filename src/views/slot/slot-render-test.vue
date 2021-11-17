@@ -12,7 +12,7 @@
 <script>
 import SlotRender from '@/views/slot/components/slot-render'
 export default {
-  name: 'test',
+  name: 'slot-render-test',
   components: {
     SlotRender,
   },

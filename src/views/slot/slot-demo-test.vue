@@ -1,6 +1,6 @@
 <template>
   <slot-demo>
-    <template #header="scope">$scopedSlots.header ===> {{ scope.header.text }}</template>
+    <template #header="scope">scope.header ===> {{ scope.header.text }}</template>
     <template #center>
       <b>I'm in center</b>
     </template>
@@ -12,7 +12,7 @@
 <script>
 import SlotDemo from '@/views/slot/components/slot-demo'
 export default {
-  name: 'test',
+  name: 'slot-demo-test',
   components: {
     SlotDemo,
   },

@@ -21,7 +21,7 @@
 <script>
 console.log('load NestedRoute.vue')
 export default {
-  name: 'nested',
+  name: 'nested-route',
   computed: {
     name: function () {
       return this.$route.params.name

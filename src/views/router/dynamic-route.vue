@@ -8,7 +8,7 @@
 <script>
 console.log('load DynamicRoute.vue')
 export default {
-  name: 'dynamic',
+  name: 'dynamic-route',
   computed: {
     name: function () {
       return this.$route.params.name //参数都保存在params中

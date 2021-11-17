@@ -56,6 +56,7 @@
 
 <script>
 export default {
+  name: 'in-component-guards',
   beforeRouteEnter(to, from, next) {
     // 在渲染该组件的对应路由被 confirm 前调用
     // 不！能！获取组件实例 `this`
