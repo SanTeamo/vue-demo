@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import SlotDemo from '@/views/slot/components/slot-demo'
+import SlotDemo from './components/slot-demo'
 export default {
   name: 'slot-demo-test',
   components: {

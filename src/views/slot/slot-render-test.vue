@@ -1,3 +1,4 @@
+<!--suppress HtmlUnknownAttribute -->
 <template>
   <slot-render>
     <template #header="scope">{{ scope.text }}</template>
@@ -10,7 +11,7 @@
 </template>
 
 <script>
-import SlotRender from '@/views/slot/components/slot-render'
+import SlotRender from './components/slot-render'
 export default {
   name: 'slot-render-test',
   components: {

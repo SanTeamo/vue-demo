@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter, { RouteConfig } from 'vue-router'
 import pages from './page/pages'
 //路由懒加载
 // import BasicRoute from '@/views/router/BasicRoute.vue'
@@ -15,10 +15,9 @@ Vue.use(VueRouter)
 
 // 匹配 ./folderA/compA.vue 或者 ./folder-a/comp-a.vue
 const files = require.context('../views', true, /^.\/[\w|-]+\/[\w|-]+\.vue$/i)
-let routes = []
+let routes: Array<RouteConfig> = []
 files.keys().forEach((key) => {
-  console.log(key)
-  let newKey = key.replace(/(\.\/|\.vue)/g, '')
+  const newKey = key.replace(/(\.\/|\.vue)/g, '')
   const route = {
     path: `/${newKey}`,
     name: newKey.replace(/(\/)/g, '-'),
@@ -30,12 +29,11 @@ files.keys().forEach((key) => {
 routes = routes.concat([
   {
     path: '/router/dynamic/:name',
-    name: 'DynamicRoute',
-    component: () => import(/* webpackChunkName: "about" */ '@/views/router/dynamic-route'),
+    name: 'router-dynamic-:name',
+    component: () => import(/* webpackChunkName: "about" */ '@/views/router/dynamic-route.vue'),
   },
   {
     path: '/router/nested/:name',
-    name: 'NestedRoute',
     component: NestedRoute,
     children: [
       {
@@ -63,8 +61,7 @@ routes = routes.concat([
     ],
   },
   {
-    path: '/router/NamedView',
-    name: 'NamedView',
+    path: '/router/named-view',
     component: NamedView,
     children: [
       {
@@ -90,14 +87,14 @@ routes = routes.concat([
     ],
   },
   {
-    path: '/router/PassingPropsRoute/:name',
+    path: '/router/passing-props-route/:name',
     component: PassingPropsRoute,
     // props: true, // 布尔模式 如果 props 被设置为 true，route.params 将会被设置为组件属性props。
     // props: {name: 'Bob', id: 1 }, // 对象模式
     props: (route) => ({ q: route.query.q, name: 'a' }),
   },
   {
-    path: '/router/InComponentGuards',
+    path: '/router/in-component-guards',
     component: InComponentGuards,
     props: (route) => ({ q: route.query.q, name: 'a' }),
   },
@@ -125,20 +122,20 @@ router.beforeEach((to, from, next) => {
       next()
     }
   } else {
-    next() // 确保一定要调用 next()
+    // 确保一定要调用 next()
+    next()
   }
 })
 
 router.beforeResolve((to, from, next) => {
-  // console.log('%c 全局解析守卫 beforeResolve', 'color:blue')
-  // console.log(to, from)
+  console.log('%c 全局解析守卫 beforeResolve', 'color:blue')
+  console.log(to, from)
   next()
 })
 
-// eslint-disable-next-line no-unused-vars
 router.afterEach((to, from) => {
-  // console.log('%c 全局后置钩子 afterEach', 'color:blue')
-  // console.log(to, from)
+  console.log('%c 全局后置钩子 afterEach', 'color:blue')
+  console.log(to, from)
 })
 
 export default router
