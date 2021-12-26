@@ -61,23 +61,25 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'programmatic-navigation',
-  methods: {
-    push() {
-      this.$router.push('/router/nested/Bob')
-    },
-    replace() {
-      this.$router.replace('/router/nested/Bob')
-    },
-    goBack() {
-      this.$router.go(-1)
-    },
-    goPrev() {
-      this.$router.go(1)
-    },
-  },
+})
+export default class ProgrammaticNavigation extends Vue {
+  push(): void {
+    this.$router.push('/router/nested/Bob')
+  }
+  replace(): void {
+    this.$router.replace('/router/nested/Bob')
+  }
+  goBack(): void {
+    this.$router.go(-1)
+  }
+  goPrev(): void {
+    this.$router.go(1)
+  }
 }
 </script>
 

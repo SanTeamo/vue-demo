@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <el-container style="height: 100%">
-      <el-aside width="0">Aside</el-aside>
+      <el-aside width="20%">
+        <side-menu></side-menu>
+      </el-aside>
       <el-container>
         <el-header>
           <el-button-group>
@@ -22,17 +24,23 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import SideMenu from '@/router/page/side-menu.vue'
+
+@Component({
   name: 'App',
-  methods: {
-    back() {
-      this.$router.go(-1)
-    },
-    pre() {
-      this.$router.go(1)
-    },
+  components: {
+    SideMenu,
   },
+})
+export default class App extends Vue {
+  back(): void {
+    this.$router.go(-1)
+  }
+  pre(): void {
+    this.$router.go(1)
+  }
 }
 </script>
 

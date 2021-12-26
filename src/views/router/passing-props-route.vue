@@ -8,13 +8,20 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Prop, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'passing-props-route',
-  props: ['name', 'id', 'q'],
-  created() {
+})
+export default class PassingPropsRoute extends Vue {
+  @Prop({ default: '' }) private name?: string
+  @Prop({ default: '' }) private id?: string
+  @Prop({ default: '' }) private q?: string
+
+  created(): void {
     console.log(this.$route.params)
-  },
+  }
 }
 </script>
 

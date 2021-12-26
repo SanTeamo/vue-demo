@@ -10,25 +10,25 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'slot-child',
-  data() {
-    return {
-      childProp: {
-        default: "I'm the slot-child childProp default",
-        text: "I'm the slot-child childProp",
-      },
-      other: {
-        default: "I'm the slot-child other default",
-        text: "I'm the slot-child other",
-      },
-    }
-  },
-  mounted() {
+})
+export default class SlotChild extends Vue {
+  private childProp = {
+    default: "I'm the slot-child childProp default",
+    text: "I'm the slot-child childProp",
+  }
+  private other = {
+    default: "I'm the slot-child other default",
+    text: "I'm the slot-child other",
+  }
+  mounted(): void {
     console.log('slot-child', this.$slots)
     console.log('slot-child', this.$scopedSlots)
-  },
+  }
 }
 </script>
 

@@ -18,15 +18,18 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
 console.log('load NestedRoute.vue')
-export default {
+
+@Component({
   name: 'nested-route',
-  computed: {
-    name: function () {
-      return this.$route.params.name
-    },
-  },
+})
+export default class NestedRoute extends Vue {
+  get name(): string {
+    return this.$route.params.name
+  }
 }
 </script>
 

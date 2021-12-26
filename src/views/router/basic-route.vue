@@ -2,22 +2,24 @@
   <div>
     <h2>basic route</h2>
     <div>
-      <button @click="$router.push('/router/dynamic/Alice')">点击跳转 dynamic route</button>
+      <el-button @click="$router.push('/router/dynamic/Alice')">点击跳转 dynamic route</el-button>
     </div>
     <div>
-      <button @click="nestedButtonClick">点击跳转 nested route</button>
+      <el-button @click="nestedButtonClick">点击跳转 nested route</el-button>
     </div>
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'basic-route',
-  methods: {
-    nestedButtonClick() {
-      this.$router.push('/router/nested/Bob')
-    },
-  },
+})
+export default class BasicRoute extends Vue {
+  nestedButtonClick(): void {
+    this.$router.push('/router/nested/Bob')
+  }
 }
 </script>
 

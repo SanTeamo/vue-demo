@@ -9,14 +9,17 @@
   </slot-demo>
 </template>
 
-<script>
-import SlotDemo from './components/slot-demo'
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+import SlotDemo from './components/slot-demo.vue'
+
+@Component({
   name: 'slot-demo-test',
   components: {
     SlotDemo,
   },
-}
+})
+export default class SlotDemoTest extends Vue {}
 </script>
 
 <style scoped></style>

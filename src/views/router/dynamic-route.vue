@@ -5,19 +5,22 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 console.log('load DynamicRoute.vue')
-export default {
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'dynamic-route',
-  computed: {
-    name: function () {
-      return this.$route.params.name //参数都保存在params中
-    },
-  },
-  created() {
+})
+export default class DynamicRoute extends Vue {
+  get name(): string {
+    return this.$route.params.name //参数都保存在params中
+  }
+
+  created(): void {
     console.log('this.$route', this.$route) // 当前子页面路由信息
     console.log('this.$router', this.$router) // 全局路由信息
-  },
+  }
 }
 </script>
 

@@ -11,13 +11,16 @@
 </template>
 
 <script>
+import { Component, Vue } from 'vue-property-decorator'
 import SlotRender from './components/slot-render'
-export default {
+
+@Component({
   name: 'slot-render-test',
   components: {
     SlotRender,
   },
-}
+})
+export default class SlotRenderTest extends Vue {}
 </script>
 
 <style scoped></style>

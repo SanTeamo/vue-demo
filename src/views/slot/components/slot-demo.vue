@@ -20,24 +20,24 @@
   </div>
 </template>
 
-<script>
-import SlotChild from './slot-child'
-export default {
+<script lang="ts">
+import SlotChild from './slot-child.vue'
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'slot-demo',
   components: {
     SlotChild,
   },
-  data() {
-    return {
-      headerProps: {
-        text: 'headerProps text',
-      },
-    }
-  },
-  mounted() {
+})
+export default class SlotDemo extends Vue {
+  private headerProps = {
+    text: 'headerProps text',
+  }
+  mounted(): void {
     console.log(this.$slots)
     console.log(this.$scopedSlots)
-  },
+  }
 }
 </script>
 

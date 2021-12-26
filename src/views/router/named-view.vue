@@ -11,10 +11,13 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator'
+
+@Component({
   name: 'named-view',
-}
+})
+export default class NamedView extends Vue {}
 </script>
 
 <style scoped></style>
